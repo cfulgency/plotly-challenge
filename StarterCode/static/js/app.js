@@ -1,35 +1,35 @@
-// Creating function for Data plotting (Bar, gauge, bubble)
+// Create Function for Data Plots (Bar Graph, Bubble Chart, Gauge Chart)
 function getPlot(id) {
-    // getting data from the json file
+    // Pull Data from JSON File
     d3.json("Data/samples.json").then((data)=> {
         console.log(data)
   
         var wfreq = data.metadata.map(d => d.wfreq)
         console.log(`Washing Freq: ${wfreq}`)
         
-        // filter sample values by id 
+        // Filter Sample Values by ID 
         var samples = data.samples.filter(s => s.id.toString() === id)[0];
         
         console.log(samples);
   
-        // Getting the top 10 
+        // Identify Top Ten Samples 
         var samplevalues = samples.sample_values.slice(0, 10).reverse();
   
-        // get only top 10 otu ids for the plot OTU and reversing it. 
+        // Pull Top Ten otu IDs for Plot OTU and Reverse it. 
         var OTU_top = (samples.otu_ids.slice(0, 10)).reverse();
         
-        // get the otu id's to the desired form for the plot
+        // Pull otu IDs to Desired form for Plot
         var OTU_id = OTU_top.map(d => "OTU " + d)
   
       //   console.log(`OTU IDS: ${OTU_id}`)
   
   
-        // get the top 10 labels for the plot
+        // Get Top Ten Labels for Plot
         var labels = samples.otu_labels.slice(0, 10);
   
       //   console.log(`Sample Values: ${samplevalues}`)
       //   console.log(`Id Values: ${OTU_top}`)
-        // create trace variable for the plot
+        // Build Trace Variable for Plot
         var trace = {
             x: samplevalues,
             y: OTU_id,
@@ -40,10 +40,10 @@ function getPlot(id) {
             orientation: "h",
         };
   
-        // create data variable
+        // Build Data Variable
         var data = [trace];
   
-        // create layout variable to set plots layout
+        // Build Layout Variable and Set Plot Layout
         var layout = {
             title: "Top 10 OTU",
             yaxis:{
@@ -57,12 +57,12 @@ function getPlot(id) {
             }
         };
   
-        // create the bar plot
+        // Build Bar Plot
         Plotly.newPlot("bar", data, layout);
   
         //console.log(`ID: ${samples.otu_ids}`)
       
-        // The bubble chart
+        // Bubble Chart
         var trace1 = {
             x: samples.otu_ids,
             y: samples.sample_values,
@@ -88,7 +88,7 @@ function getPlot(id) {
         // create the bubble plot
         Plotly.newPlot("bubble", data1, layout_b); 
   
-        // The guage chart
+        // Guage Chart
   
         var data_g = [
           {
