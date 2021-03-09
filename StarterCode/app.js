@@ -29,7 +29,7 @@ function init() {
 
     // Read Data 
     d3.json("data/samples.json").then((data)=> {
-        data.names(data);
+        console.log(data);
 
         // Get ID Data into Dropdwown Menu
         data.names.forEach((name) => {
@@ -62,14 +62,14 @@ function getPlot(id) {
         // Get OTU IDs in the Proper Form for Plot
         var OTU_id = OTU_top.map(d => "OTU " + d)
   
-      //   data.names(`OTU IDS: ${OTU_id}`)
+      //   console.log(`OTU IDS: ${OTU_id}`)
   
   
         // Get Top 10 Labels for Plot
         var labels = samples.otu_labels.slice(0, 10);
   
-      //   data.names(`Sample Values: ${samplevalues}`)
-      //   data.names(`Id Values: ${OTU_top}`)
+      //   console.log(`Sample Values: ${samplevalues}`)
+      //   console.log(`Id Values: ${OTU_top}`)
         // create trace variable for the plot
         var trace = {
             x: samplevalues,
@@ -101,7 +101,7 @@ function getPlot(id) {
         // Create Bar Plot
         Plotly.newPlot("bar", data, layout);
   
-        // data.names(`ID: ${samples.otu_ids}`)
+        //console.log(`ID: ${samples.otu_ids}`)
       
         // Bubble Plot
         var trace1 = {
@@ -166,7 +166,7 @@ function getInfo(id) {
         // Get Metadata for Demo Panel
         var metadata = data.metadata;
 
-        data.names(metadata)
+        console.log(metadata)
 
         // Filter Meta Data by ID
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
